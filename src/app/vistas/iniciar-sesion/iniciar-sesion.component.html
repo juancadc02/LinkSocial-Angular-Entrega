@@ -1,0 +1,68 @@
+<section class="background-radial-gradient vh-100 overflow-hidden">
+    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+      <div class="row gx-lg-5 align-items-center mb-5">
+        <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+          <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+            Bienvenido a<br />
+            <span style="color: hsl(216, 20%, 5%)">LinkSocial</span>
+          </h1>
+        </div>
+  
+        <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+          <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+          <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+  
+  
+          <div id="formularioInicio" class="card bg-glass">
+            <div class="card-body px-4 py-5 px-md-5">
+  
+  
+              <!-- Email -->
+              <div class="form-outline mb-4">
+                <label class="form-label" for="correoElectronico">Correo</label>
+                <input type="email" id="correoElectronico" name="correoElectronico" class="form-control" #email />
+              </div>
+  
+              <!-- Contraseña -->
+              <div class="form-outline mb-4">
+                <label class="form-label" for="contrasena">Contraseña</label>
+                <input type="password" id="contrasena" name="contrasena" class="form-control" #password />
+              </div>
+  
+              <!-- Botón de Iniciar Sesión -->
+              <button type="submit" class="btn btn-primary btn-block mb-4"
+                (click)="iniciarSesion(email.value,password.value)">
+                Iniciar Sesión
+              </button>
+  
+              <!--Mensaje sesion cerrada.-->
+              <div *ngIf="mensajeSesionCerrada" class="alert alert-success mt-3" role="alert">
+                {{ mensajeSesionCerrada }}
+              </div>
+  
+              <!--Mensaje de error-->
+              <div *ngIf="mostrarError" class="alert alert-danger mt-3" role="alert">
+                Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.
+                <button type="button" class="close" aria-label="Close" (click)="cerrarError()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <!-- Otras opciones -->
+              <div class="text-center">
+                <p>¿No estás registrado? <a routerLink="/registrarUsuario">Registrar</a></p>
+                <p>¿Has olvidado la contrasena? <a routerLink="/recuperacion">Recuperar Contrasena</a></p>
+                <p>O regístrate con:</p>
+  
+              <!--  <button type="button" class="btn btn-link btn-floating mx-1" (click)="iniciarSesionConGoogle()">
+                  <i class="bi bi-google"></i>
+                </button>-->
+  
+              </div>
+  
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

@@ -1,0 +1,51 @@
+#sidebar {
+  width: 10%;
+  height: 100vh;
+  background: #343a40;
+}
+
+main {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.publicacion-container {
+  max-width: 400px;
+  max-height: 900px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.publicacion-container img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.publicacion-header {
+  margin-bottom: 10px;
+}
+
+.comentarios-container {
+  max-height: 100px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.comentario {
+  margin-bottom: 10px;
+}
+
+.comentario-form {
+  margin-top: 20px;
+}
+
+.scrollable-container {
+  overflow-y: auto;
+  max-height: 99vh;
+}

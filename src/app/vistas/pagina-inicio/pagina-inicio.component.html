@@ -1,0 +1,45 @@
+<div class="scrollable-container">
+  <div class="d-flex">
+    <div class="flex-grow-1 mx-auto col-6">
+      <div class="container">
+        <h2 style="text-align: center;">LinkSocial</h2>
+      </div>
+      <main>
+        <!-- Container para mostrar las publicaciones -->
+        <div class="publicacion-container mx-auto mb-4" *ngFor="let publicacion of publicaciones">
+          <p><b>{{ publicacion.nombreUsuario }}</b></p>
+          <img class="img-fluid" [src]="publicacion.downloadURL" alt="Imagen Subida" />
+          <p>Pie de Foto: {{ publicacion.pieDeFoto }}</p>
+          
+          <!-- Botón para dar like -->
+          <i (click)="toggleLike(publicacion.idPublicacion)"
+          [class]="publicacionLeGusto(publicacion.idPublicacion) ? 'bi bi-heart-fill' : 'bi bi-heart'"></i>
+       
+          <!-- Formulario de comentarios asociado al ID de la publicación -->
+          <form (ngSubmit)="agregarComentario(publicacion.idPublicacion)" #comentarioForm="ngForm" class="comentario-form">
+            <div class="form-group">
+              <textarea [(ngModel)]="nuevosComentarios[publicacion.idPublicacion]" name="nuevoComentario" class="form-control" placeholder="Escribe tu comentario"></textarea>
+            </div>
+            <div class="text-center">
+              <button class="btn btn-primary btn-sm" type="submit">Agregar Comentario</button>
+            </div>
+          </form>
+
+          <!-- Mostrar comentarios existentes -->
+          <div *ngIf="publicacion.comentarios && publicacion.comentarios.length > 0" class="comentarios-container">
+            <h4>Comentarios:</h4>
+            <div *ngFor="let comentario of publicacion.comentarios" class="comentario">
+              <p><strong>{{ comentario.nombreUsuario }} :</strong> {{ comentario.contenidoComentario }}</p>
+            
+              <!-- Otros detalles del comentario según sea necesario -->
+            </div>
+          </div>
+
+          <div *ngIf="!publicacion.comentarios || publicacion.comentarios.length === 0" class="comentarios-container">
+            <p>No hay comentarios aún.</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>

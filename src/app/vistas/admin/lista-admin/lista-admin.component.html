@@ -1,0 +1,32 @@
+<!-- Tu tabla con estilos de Bootstrap para dispositivos móviles -->
+<div class="table-responsive mt-5">
+    <table class="table table-striped table-hover">
+        <!-- Cabezera. -->
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Fecha Nacimiento</th>
+                <th scope="col">Movil</th>
+                <th scope="col">Rol Acceso</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+
+        <!-- Contenido de la tabla. -->
+        <tbody>
+            <tr *ngFor="let usuarios of listaUsuarios">
+                <td>{{usuarios.nombreCompleto}}</td>
+                <td>{{usuarios.correoElectronico}}</td>
+                <td>{{usuarios.fchNacimiento}}</td>
+                <td>{{usuarios.movilUsuario}}</td>
+                <td>{{usuarios.rolAcceso}}</td>
+                <td>
+                    <span>
+                        <i class="bi bi-pencil-square text-warning" routerLink="/admin/{{usuarios.idUsuarios}}"></i>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

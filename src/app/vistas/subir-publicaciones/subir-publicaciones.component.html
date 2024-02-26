@@ -1,0 +1,19 @@
+<div class="container mt-5">
+  <div class="text-center">
+    <h2>Subir Foto</h2>
+  </div>
+
+
+  <form class="mt-4" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="foto">Seleccionar Foto:</label>
+      <input type="file" id="foto" (change)="onFileSelected($event)" required class="form-control">
+    </div>
+    <div class="mb-3">
+      <label for="pieFoto">Pie de Foto:</label>
+      <input type="text" id="pieFoto" name="pieFoto" [(ngModel)]="publicacion.pieFoto" required class="form-control">
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary">Agregar Publicación</button>
+    </div>
+  </form>

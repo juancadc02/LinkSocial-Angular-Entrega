@@ -1,0 +1,35 @@
+<div class="container mt-5">
+    <h1 class="text-center">Actualizar Usuarios</h1>
+    <br>
+    <form [formGroup]="autorForm" (ngSubmit)="modificarAutor()">
+      <!-- Correo electrónico -->
+      <div class="mb-4">
+        <label class="form-label" for="correoElectronico">Correo Electrónico</label>
+        <input type="text" id="correoElectronico" name="correoElectronico" class="form-control"
+          formControlName="correoElectronico" [(ngModel)]="usuarios.correoElectronico" readonly />
+      </div>
+      
+  
+      <!-- Nombre completo -->
+      <div class="mb-4">
+        <label class="form-label" for="nombreCompleto">Nombre Completo</label>
+        <input type="text" id="nombreCompleto" name="nombreCompleto" class="form-control" formControlName="nombreCompleto" [(ngModel)]="usuarios.nombreCompleto" />
+      </div>
+  
+      <!-- Móvil -->
+      <div class="mb-4">
+        <label class="form-label" for="movilUsuario">Móvil</label>
+        <input type="text" id="movilUsuario" name="movilUsuario" class="form-control" formControlName="movilUsuario" [(ngModel)]="usuarios.movilUsuario" />
+      </div>
+  
+      <!-- Rol de Acceso -->
+      <div class="mb-4">
+        <label class="form-label" for="rolAcceso">Rol Acceso</label>
+        <input type="text" id="rolAcceso" name="rolAcceso" class="form-control" formControlName="rolAcceso" [(ngModel)]="usuarios.rolAcceso" />
+      </div>
+  
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+      </div>
+    </form>
+  </div>

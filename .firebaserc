@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "applinksocial": {
+      "hosting": {
+        "LinkSocial-Entrega": [
+          "applinksocial"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "applinksocial"
+  }
+}

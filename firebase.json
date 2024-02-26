@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "LinkSocial-Entrega",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

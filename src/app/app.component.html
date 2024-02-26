@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+    <!-- Menú lateral con *ngIf aplicado -->
+    <ng-container *ngIf="!isLoginPage()">
+      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+          <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <span style="text-align: center;" class="fs-5 d-none d-sm-inline">LinkSocial</span>
+          </a>
+          <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+            <li class="nav-item">
+              <a routerLink="/paginaInicio" class="nav-link align-middle px-0">
+                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/admin" class="nav-link align-middle px-0">
+                <i class="bi bi-person-rolodex"></i> <span class="ms-1 d-none d-sm-inline">Administracion</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/subirPublicacion" class="nav-link align-middle px-0">
+                <i class="bi bi-image"></i> <span class="ms-1 d-none d-sm-inline" >Subir Publicaciones</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/buscarUsuario" class="nav-link align-middle px-0">
+                <i class="bi bi-person-fill"></i><span class="ms-1 d-none d-sm-inline">Buscar Usuarios</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/perfil" class="nav-link align-middle px-0">
+                <i class="bi bi-person-fill"></i><span class="ms-1 d-none d-sm-inline">Perfil</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link align-middle px-0">
+                <i class="bi bi-box-arrow-left"></i> <span class="ms-1 d-none d-sm-inline" (click)="cerrarSesion()">Cerrar Sesion</span>
+              </a>
+            </li>
+
+            
+
+            
+          </ul>
+        </div>
+      </div>
+    </ng-container>
+    
+    <!-- Contenido del router-outlet -->
+    <div class="col">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
