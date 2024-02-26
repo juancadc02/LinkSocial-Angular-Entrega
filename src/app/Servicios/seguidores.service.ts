@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { DocumentReference, Firestore, addDoc, collection } from '@angular/fire/firestore';
+import { DocumentReference, Firestore, QuerySnapshot, addDoc, collection, deleteDoc, getDocs, getFirestore, query, where } from '@angular/fire/firestore';
 import { Seguidores } from '../Modelos/seguidores';
 import Swal from 'sweetalert2';
+import { Observable, from, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
