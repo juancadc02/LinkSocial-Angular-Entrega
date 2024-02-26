@@ -1,12 +1,19 @@
 <div *ngIf="publicaciones$ | async as publicaciones; else loading">
     <!-- Asumiendo que todas las publicaciones son del mismo usuario, mostramos el correo del usuario una vez. -->
-    <h2 class="nombreUsuario" *ngIf="publicaciones.length > 0">{{ publicaciones[0].userEmail }}</h2>
+    <h2 class="nombreUsuario" *ngIf="publicaciones.length > 0">{{ publicaciones[0].correoElectronico }}</h2>
 
     <div class="informacionUsuario">
         <p>Publicaciones: {{ publicaciones.length }}</p>
-        <p>Seguidores: [Número de seguidores]</p>
-        <p>Siguiendo: [Número de siguiendo]</p>
+        <p>Seguidores: {{numeroSeguidores}}</p>
+        <p>Siguiendo: {{numeroSeguidos}}</p>
+
+        <button (click)="toggleSeguirDejarDeSeguir()" class="btn btn-primary">
+            {{ esSeguido ? 'Dejar de seguir' : 'Seguir' }}
+          </button>
     </div>
+
+    
+
 
     <!-- Contenedor de la cuadrícula de imágenes -->
     <div class="row">
@@ -14,7 +21,6 @@
         <div class="col-4" *ngFor="let publicacion of publicaciones">
             <div class="imagen-contenedor">
                 <img [src]="publicacion.downloadURL" alt="Imagen de la publicación" class="img-fluid">
-                <i (click)="confirmarEliminar(publicacion)" class="bi bi-trash bg bg-danger"></i>
             </div>
         </div>
     </div>

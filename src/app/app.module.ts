@@ -21,6 +21,8 @@ import { AdminComponent } from './vistas/admin/admin.component';
 import { DetalleAdminComponent } from './vistas/admin/detalle-admin/detalle-admin.component';
 import { ListaAdminComponent } from './vistas/admin/lista-admin/lista-admin.component';
 import { PerfilUsuarioSesionComponent } from './vistas/perfil-usuario-sesion/perfil-usuario-sesion.component';
+import { BuscarUsuariosComponent } from './vistas/buscar-usuarios/buscar-usuarios.component';
+import { PerfilUsuarioBuscadoComponent } from './vistas/buscar-usuarios/perfil-usuario-buscado/perfil-usuario-buscado.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { PerfilUsuarioSesionComponent } from './vistas/perfil-usuario-sesion/per
     DetalleAdminComponent,
     ListaAdminComponent,
     PerfilUsuarioSesionComponent,
+    BuscarUsuariosComponent,
+    PerfilUsuarioBuscadoComponent,
     
   ],
   imports: [

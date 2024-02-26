@@ -1,0 +1,15 @@
+<!-- search.component.html -->
+<div class="container mt-5 text-center">
+    <div class="mb-3">
+      <input [(ngModel)]="userEmail" placeholder="Ingrese el correo electrónico" class="form-control" />
+      <button (click)="searchUser()" class="btn btn-primary mt-2">Buscar</button>
+    </div>
+  
+    <div *ngIf="user">
+      <div class="mb-3">
+        <p>Correo: {{ user.correoElectronico }}</p>
+        <!-- Agrega aquí los demás detalles del perfil que quieras mostrar -->
+        <a [routerLink]="['/perfilUsuarioBuscado', user.uid]" *ngIf="user.uid" class="btn btn-link">Ver perfil</a>
+      </div>
+    </div>
+  </div>

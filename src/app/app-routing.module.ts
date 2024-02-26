@@ -7,6 +7,7 @@ import { SubirPublicacionesComponent } from './vistas/subir-publicaciones/subir-
 import { AdminComponent } from './vistas/admin/admin.component';
 import { DetalleAdminComponent } from './vistas/admin/detalle-admin/detalle-admin.component';
 import { AdminGuard } from './Guard/adminGuard';
+import { PerfilUsuarioSesionComponent } from './vistas/perfil-usuario-sesion/perfil-usuario-sesion.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/iniciarSesion', pathMatch: 'full' }, 
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'paginaInicio', component: PaginaInicioComponent },
   {path:'subirPublicacion',component:SubirPublicacionesComponent},
   {path:'admin',component:AdminComponent,canActivate: [AdminGuard] },
-  {path:'admin/:id',component:DetalleAdminComponent,canActivate: [AdminGuard] }
+  {path:'admin/:id',component:DetalleAdminComponent,canActivate: [AdminGuard] },
+  {path:'perfil',component:PerfilUsuarioSesionComponent}
 ];
 
 @NgModule({
