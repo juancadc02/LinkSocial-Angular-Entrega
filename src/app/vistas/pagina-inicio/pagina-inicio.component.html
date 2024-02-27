@@ -1,4 +1,10 @@
-<div class="scrollable-container">
+<div class="d-flex align-items-center justify-content-center vh-100">
+  <div *ngIf="cargando" class="text-center">
+    <!-- Utiliza el icono de carga de Bootstrap con la clase de tamaño bi-5x -->
+    <i class="bi bi-hourglass-split bi-5x"></i>
+    <p>Cargando...</p>
+  </div>
+<div *ngIf="!cargando" class="scrollable-container">
   <div class="d-flex">
     <div class="flex-grow-1 mx-auto col-6">
       <div class="container">

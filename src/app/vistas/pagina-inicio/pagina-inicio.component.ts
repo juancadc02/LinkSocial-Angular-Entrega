@@ -20,6 +20,8 @@ export class PaginaInicioComponent {
   private likes: string[] = [];
   nuevosComentarios: { [key: string]: string } = {};
 
+  cargando: boolean = true; // Variable para indicar si se está cargando
+
   constructor(private servicioFirebase: FirebaseService,
     private router: Router,
     private servicioPublicacion: PublicacionService,
@@ -57,7 +59,11 @@ export class PaginaInicioComponent {
   
       this.cargarLikes(); // Agrega esta línea para cargar los likes al inicializar
     });
-    
+    setTimeout(() => {
+      this.cargando = false; // Después de 2 segundos, establecer cargando a false
+      this.cdRef.detectChanges(); // Notificar al ChangeDetector que ha habido cambios
+    }, 2000);
+  
   }
 
 
