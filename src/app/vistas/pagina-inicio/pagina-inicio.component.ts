@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
 import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
@@ -7,6 +7,7 @@ import { ComentariosService } from 'src/app/Servicios/comentarios.service';
 import { FirebaseService } from 'src/app/Servicios/firebase.service';
 import { LikeService } from 'src/app/Servicios/like.service';
 import { PublicacionService } from 'src/app/Servicios/publicacion.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pagina-inicio',
@@ -24,7 +25,9 @@ export class PaginaInicioComponent {
     private servicioPublicacion: PublicacionService,
     private servicioLike:LikeService,
     private servicioComentarios:ComentariosService,
-    private auth: AngularFireAuth) { }
+    private auth: AngularFireAuth,
+    private cdRef: ChangeDetectorRef,
+    private ngZone: NgZone) { }
 
   ngOnInit() {
     // Comprobar el estado de la sesión en el inicio del componente
@@ -62,7 +65,7 @@ export class PaginaInicioComponent {
   //Metodo para agregar un comentario a una publicacion especifica por el id
   async agregarComentario(idPublicacion: string) {
     const uidUsuario = await this.servicioComentarios.obtenerUsuarioActual();
-
+  
     if (uidUsuario && this.nuevosComentarios[idPublicacion]?.trim() !== '') {
       const nuevoComentario = {
         idUsuario: uidUsuario,
@@ -70,10 +73,30 @@ export class PaginaInicioComponent {
         contenidoComentario: this.nuevosComentarios[idPublicacion],
         fchComentario: new Date().toISOString(),
       };
-
-      this.servicioComentarios.agregarComentario(nuevoComentario).then(() => {
+  
+      this.servicioComentarios.agregarComentario(nuevoComentario).then(async () => {
         this.nuevosComentarios[idPublicacion] = '';
-        this.router.navigate(['/paginaInicio']);
+        Swal.fire({
+          title: "Éxito",
+          text: "Has comentado con exito",
+          icon: "success",
+          confirmButtonText: "Aceptar"
+        }).then(() => {
+          location.reload();
+        });
+        // Obtener los comentarios actualizados para la publicación
+        const comentariosActualizados = await this.servicioComentarios.obtenerComentariosDePublicacionPorId(idPublicacion).toPromise();
+  
+        // Actualizar la propiedad comentarios de la publicación
+        const publicacionActualizada = this.publicaciones.find(publicacion => publicacion.idPublicacion === idPublicacion);
+        if (publicacionActualizada) {
+          publicacionActualizada.comentarios = comentariosActualizados;
+  
+          // Actualizar el nombre del usuario para cada comentario
+          publicacionActualizada.comentarios.forEach(async (comentario: any) => {
+            comentario.nombreUsuario = await this.servicioComentarios.obtenerCorreoUsuarioPorSuId(comentario.idUsuario);
+          });
+        }
       });
     }
   }
