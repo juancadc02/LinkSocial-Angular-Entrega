@@ -10,6 +10,7 @@ import { AdminGuard } from './Guard/adminGuard';
 import { PerfilUsuarioSesionComponent } from './vistas/perfil-usuario-sesion/perfil-usuario-sesion.component';
 import { BuscarUsuariosComponent } from './vistas/buscar-usuarios/buscar-usuarios.component';
 import { PerfilUsuarioBuscadoComponent } from './vistas/buscar-usuarios/perfil-usuario-buscado/perfil-usuario-buscado.component';
+import { RecuperarContrasenaComponent } from './vistas/recuperar-contrasena/recuperar-contrasena.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/iniciarSesion', pathMatch: 'full' }, 
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path:'admin/:id',component:DetalleAdminComponent,canActivate: [AdminGuard] },
   {path:'perfil',component:PerfilUsuarioSesionComponent},
   {path:'buscarUsuario',component:BuscarUsuariosComponent},
-  {path:'perfilUsuarioBuscado/:id',component:PerfilUsuarioBuscadoComponent}
+  {path:'perfilUsuarioBuscado/:id',component:PerfilUsuarioBuscadoComponent},
+  {path:'recuperar-contrasena',component:RecuperarContrasenaComponent}
 ];
 
 @NgModule({

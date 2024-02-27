@@ -1,0 +1,18 @@
+.background-radial-gradient {
+    background-image: url('../../../assets/imagenes/fotoFondoInicioSesionOscuro.jpg');
+    background-size: cover; /* Ajusta el tamaño de la imagen de fondo */
+    background-repeat: no-repeat; /* Asegura que la imagen no se repita */
+    background-position: center center; /* Centra la imagen */
+  }
+  
+  .bg-glass {
+    background-color: hsla(0, 0%, 100%, 0.9) !important;
+    
+    backdrop-filter: saturate(200%) blur(25px);
+  }
+  button{
+    margin-left: 180px;
+  }
+  #formularioInicio{
+    margin-top: 100px;
+  }

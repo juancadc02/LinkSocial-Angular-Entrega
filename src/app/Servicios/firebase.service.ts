@@ -65,4 +65,20 @@ export class FirebaseService {
   obtenerEstadoUsuario() {
     return this.auth.authState;
   }
+
+  //Metodo que envia correo para la recuperacion de contraseña.
+  recuperacionDeContrasena(email: string) {
+    return this.auth.sendPasswordResetEmail(email)
+      .then(() => {
+        console.log('Correo de recuperación enviado con éxito.');
+        // Puedes redirigir a una página de confirmación o mostrar un mensaje al usuario.
+      })
+      .catch((error) => {
+        console.error('Error al enviar el correo de recuperación: ', error);
+        alert(error.message);
+      });
+  }
+
+
+
 }

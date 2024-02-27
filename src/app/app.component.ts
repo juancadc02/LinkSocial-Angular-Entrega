@@ -15,7 +15,7 @@ constructor(private servicioFirebase:FirebaseService,private router:Router,priva
 
 
 isLoginPage(): boolean {
-  return this.router.url === '/iniciarSesion' || this.router.url === '/registrarUsuario' || this.router.url==='/recuperacion' ;
+  return this.router.url === '/iniciarSesion' || this.router.url === '/registrarUsuario' || this.router.url==='/recuperar-contrasena' ;
 }
 
 

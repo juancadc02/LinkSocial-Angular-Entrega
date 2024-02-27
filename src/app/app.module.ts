@@ -23,6 +23,7 @@ import { ListaAdminComponent } from './vistas/admin/lista-admin/lista-admin.comp
 import { PerfilUsuarioSesionComponent } from './vistas/perfil-usuario-sesion/perfil-usuario-sesion.component';
 import { BuscarUsuariosComponent } from './vistas/buscar-usuarios/buscar-usuarios.component';
 import { PerfilUsuarioBuscadoComponent } from './vistas/buscar-usuarios/perfil-usuario-buscado/perfil-usuario-buscado.component';
+import { RecuperarContrasenaComponent } from './vistas/recuperar-contrasena/recuperar-contrasena.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { PerfilUsuarioBuscadoComponent } from './vistas/buscar-usuarios/perfil-u
     PerfilUsuarioSesionComponent,
     BuscarUsuariosComponent,
     PerfilUsuarioBuscadoComponent,
+    RecuperarContrasenaComponent,
     
   ],
   imports: [
