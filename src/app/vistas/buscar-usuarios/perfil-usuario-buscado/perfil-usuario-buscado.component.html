@@ -1,6 +1,9 @@
+
 <div *ngIf="publicaciones$ | async as publicaciones; else loading">
     <!-- Asumiendo que todas las publicaciones son del mismo usuario, mostramos el correo del usuario una vez. -->
     <h2 class="nombreUsuario" *ngIf="publicaciones.length > 0">{{ publicaciones[0].correoElectronico }}</h2>
+    
+    <h2 class="nombreUsuario" *ngIf="publicaciones.length === 0 && userEmailSinPublic">{{ userEmailSinPublic }}</h2>
 
     <div class="informacionUsuario">
         <p>Publicaciones: {{ publicaciones.length }}</p>

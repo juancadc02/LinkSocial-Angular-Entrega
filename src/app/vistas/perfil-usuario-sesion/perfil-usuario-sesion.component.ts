@@ -12,58 +12,64 @@ import { SeguidoresService } from 'src/app/Servicios/seguidores.service';
 })
 export class PerfilUsuarioSesionComponent {
 
-  //Lo inicializo en vacio
   public publicaciones$: Observable<any[]> = of([]);
+  numeroDeSeguidores = 0;
+  numeroDeSeguidos = 0;
+  userEmail: string | null = null;
 
-
-  numeroDeSeguidores =0;
-  numeroDeSeguidos =0;
-  constructor(private perfilServicio: PerfilUsuarioService,private servicioSeguidores: SeguidoresService) { }
+  constructor(private perfilServicio: PerfilUsuarioService, private servicioSeguidores: SeguidoresService) { }
 
   ngOnInit(): void {
-    this.publicaciones$ = this.perfilServicio.getAllPublicaciones();
-    this.publicaciones$.subscribe(data => console.log('Publicaciones:', data));
+    this.perfilServicio.correoUsuarioAutentificado().subscribe(
+      (correo) => {
+        console.log('Correo del usuario:', correo);
+        this.userEmail = correo;
 
-    // Obtener la instancia de autenticación
-    const auth = getAuth();
+        if (correo) {
+          this.publicaciones$ = this.perfilServicio.getAllPublicaciones();
+          this.publicaciones$.subscribe(
+            (data) => console.log('Publicaciones:', data),
+            (error) => console.error('Error al obtener publicaciones:', error)
+          );
 
-    // Observar cambios en el estado de autenticación
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // El usuario está autenticado, ahora puedes obtener su información
-        const userId = user.uid;
+          // Obtener el número de seguidos y seguidores
+          const auth = getAuth();
+          onAuthStateChanged(auth, (user) => {
+            if (user) {
+              const userId = user.uid;
+              this.servicioSeguidores.numeroSeguidos(userId).subscribe((seguidos) => {
+                this.numeroDeSeguidos = seguidos;
+              });
 
-        // Llamar a tus funciones para obtener el número de seguidos y seguidores
-        this.servicioSeguidores.numeroSeguidos(userId).subscribe((seguidos) => {
-          this.numeroDeSeguidos = seguidos;
-        });
+              this.servicioSeguidores.numeroSeguidores(userId).subscribe((seguidores) => {
+                this.numeroDeSeguidores = seguidores;
+              });
+            } else {
+              console.log('Usuario no autenticado');
+            }
+          });
 
-        this.servicioSeguidores.numeroSeguidores(userId).subscribe((seguidores) => {
-          this.numeroDeSeguidores = seguidores;
-        });
-      } else {
-        // El usuario no está autenticado
-        console.log('Usuario no autenticado');
-      }
-    });
+        } else {
+          console.log('Usuario no autenticado');
+        }
+      },
+      (error) => console.error('Error al obtener correo del usuario autenticado:', error)
+    );
   }
 
-   //Metodo de confirmacion de eliminar una cita.
-   confirmarEliminar(publicacion: Publicaciones) {
+  confirmarEliminar(publicacion: Publicaciones) {
     const confirmacion = window.confirm(`¿Estás seguro de que deseas eliminar la cita con id: ${publicacion.idPublicaion}?`);
     if (confirmacion) {
       this.eliminarUsuario(publicacion);
     }
   }
+
   eliminarUsuario(publicacion: Publicaciones) {
-    // Verificamos si idPublicaion es una cadena antes de usarlo
     if (publicacion.idPublicaion !== undefined) {
       console.log('ID de la publicación a eliminar:', publicacion.idPublicaion);
       this.perfilServicio.eliminarPublicacion(publicacion.idPublicaion, "publicaciones");
-      location.reload();
     } else {
       console.error('ID de la publicación no definido');
     }
   }
-  
 }

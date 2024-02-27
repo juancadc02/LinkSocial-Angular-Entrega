@@ -1,12 +1,13 @@
+<h2 class="nombreUsuario" *ngIf="userEmail">{{ userEmail }}</h2>
+<div class="informacionUsuario">
+    <p>Seguidores: {{numeroDeSeguidores}}</p>
+    <p>Siguiendo: {{numeroDeSeguidos}}</p>
+</div>
 <div *ngIf="publicaciones$ | async as publicaciones; else loading">
     <!-- Asumiendo que todas las publicaciones son del mismo usuario, mostramos el correo del usuario una vez. -->
-    <h2 class="nombreUsuario" *ngIf="publicaciones.length > 0">{{ publicaciones[0].userEmail }}</h2>
+    <p class="informacionUsuario">Publicaciones: {{ publicaciones.length }}</p>
 
-    <div class="informacionUsuario">
-        <p>Publicaciones: {{ publicaciones.length }}</p>
-        <p>Seguidores: {{numeroDeSeguidores}}</p>
-        <p>Siguiendo: {{numeroDeSeguidos}}</p>
-    </div>
+   <br>
 
     <!-- Contenedor de la cuadrícula de imágenes -->
     <div class="row">

@@ -15,6 +15,8 @@ export class PerfilUsuarioBuscadoComponent {
   public userEmail: string | null = null;
   public esSeguido: boolean = false;
 
+  public userEmailSinPublic: string | null = null;
+
   public numeroSeguidos =0;
   public numeroSeguidores =0;
 
@@ -27,6 +29,19 @@ export class PerfilUsuarioBuscadoComponent {
   async ngOnInit(): Promise<void> {
     this.uid = this.route.snapshot.paramMap.get('id');
     
+    if (this.uid !== null) {
+      // Llamada al servicio para obtener el correo por ID
+      this.buscarUsuarioService.obtenerCorreoPorId(this.uid).subscribe(
+        (correoObtenido) => {
+          this.userEmailSinPublic = correoObtenido;
+        },
+        (error) => {
+          console.error('Error al obtener el correo por ID:', error);
+        }
+      );
+    } else {
+      console.error('El ID es nulo.');
+    }
     if (this.uid !== null) {
       // Obtener información del usuario
       this.buscarUsuarioService.getUserInfo(this.uid).subscribe(

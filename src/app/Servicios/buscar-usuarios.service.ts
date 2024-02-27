@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Firestore, collection, doc, getDoc, getDocs, getFirestore, query } from '@angular/fire/firestore';
 import { where } from '@firebase/firestore';
-import { Observable, from, map, switchMap } from 'rxjs';
+import { Observable, from, map, of, switchMap } from 'rxjs';
 import { Usuario } from '../Modelos/usuario';
+import { getAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -85,4 +86,5 @@ export class BuscarUsuariosService {
      });
    });
  }
+ 
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
 import { Firestore, collection, deleteDoc, doc, getDocs, getFirestore } from '@angular/fire/firestore';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -53,4 +53,12 @@ export class PerfilUsuarioService {
       .then(() => console.log('Publicación eliminada exitosamente'))
       .catch(error => console.error('Error al eliminar la publicación', error));
   }
+
+
+  correoUsuarioAutentificado(): Observable<string | null> {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    return of(user ? user.email : null);
+  }
+
 }
