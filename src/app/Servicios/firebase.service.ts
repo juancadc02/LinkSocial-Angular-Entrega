@@ -44,6 +44,7 @@ export class FirebaseService {
 
   cerrarSesion() {
     console.log('Cerrando sesión...');
+    localStorage.removeItem('likes');
     return this.auth.signOut();
   }
 

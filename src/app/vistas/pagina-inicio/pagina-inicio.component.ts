@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { Likes } from 'src/app/Modelos/like';
 import { ComentariosService } from 'src/app/Servicios/comentarios.service';
@@ -15,14 +16,15 @@ import { PublicacionService } from 'src/app/Servicios/publicacion.service';
 export class PaginaInicioComponent {
 
   publicaciones: any[] = [];
-  likes: string[] = [];
+  private likes: string[] = [];
   nuevosComentarios: { [key: string]: string } = {};
 
   constructor(private servicioFirebase: FirebaseService,
     private router: Router,
     private servicioPublicacion: PublicacionService,
     private servicioLike:LikeService,
-    private servicioComentarios:ComentariosService) { }
+    private servicioComentarios:ComentariosService,
+    private auth: AngularFireAuth) { }
 
   ngOnInit() {
     // Comprobar el estado de la sesión en el inicio del componente
@@ -95,11 +97,11 @@ export class PaginaInicioComponent {
     return this.likes.includes(idPublicacion);
   }
 
-  //Metodo para dar me gusta
-  async darLike(idPublicacion: string) {
-    const auth = getAuth();
-
-    onAuthStateChanged(auth, async (user) => {
+  
+  async darLike(idPublicacion: string): Promise<void> {
+    try {
+      const user = await this.auth.currentUser;
+      
       if (user) {
         const uidUsuario = user.uid;
 
@@ -113,11 +115,15 @@ export class PaginaInicioComponent {
           this.likes.push(idPublicacion);
         }
 
-        this.servicioLike.agregarLike(nuevoLike).then(() => {
-          // Puedes realizar alguna acción adicional después de dar like
-        });
+        await this.servicioLike.agregarLike(nuevoLike);
+        
+        // Puedes realizar alguna acción adicional después de dar like
+      } else {
+        console.log('Usuario no autenticado, no se puede dar like');
       }
-    });
+    } catch (error) {
+      console.error('Error al dar like:', error);
+    }
   }
 
   //Metodo para eliminar me gusta
