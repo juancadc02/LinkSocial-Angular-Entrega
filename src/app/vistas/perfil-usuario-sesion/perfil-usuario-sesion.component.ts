@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { Publicaciones } from 'src/app/Modelos/publicaciones';
 import { PerfilUsuarioService } from 'src/app/Servicios/perfil-usuario.service';
 import { SeguidoresService } from 'src/app/Servicios/seguidores.service';
@@ -17,6 +17,7 @@ export class PerfilUsuarioSesionComponent {
   numeroDeSeguidos = 0;
   userEmail: string | null = null;
 
+  mensajeNoHayPublicaciones='No hay publicaciones'
   constructor(private perfilServicio: PerfilUsuarioService, private servicioSeguidores: SeguidoresService) { }
 
   ngOnInit(): void {
@@ -67,7 +68,14 @@ export class PerfilUsuarioSesionComponent {
   eliminarUsuario(publicacion: Publicaciones) {
     if (publicacion.idPublicaion !== undefined) {
       console.log('ID de la publicación a eliminar:', publicacion.idPublicaion);
-      this.perfilServicio.eliminarPublicacion(publicacion.idPublicaion, "publicaciones");
+      this.perfilServicio.eliminarPublicacion(publicacion.idPublicaion, "publicaciones")
+        .then(() => {
+          // Eliminar la publicación de la lista local
+          this.publicaciones$ = this.publicaciones$.pipe(
+            map(publicaciones => publicaciones.filter(pub => pub.idPublicaion !== publicacion.idPublicaion))
+          );
+        })
+        .catch(error => console.error('Error al eliminar la publicación', error));
     } else {
       console.error('ID de la publicación no definido');
     }

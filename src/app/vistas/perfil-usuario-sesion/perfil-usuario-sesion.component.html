@@ -3,23 +3,16 @@
     <p>Seguidores: {{numeroDeSeguidores}}</p>
     <p>Siguiendo: {{numeroDeSeguidos}}</p>
 </div>
-<div *ngIf="publicaciones$ | async as publicaciones; else loading">
-    <!-- Asumiendo que todas las publicaciones son del mismo usuario, mostramos el correo del usuario una vez. -->
+<div *ngIf="publicaciones$ | async as publicaciones">
     <p class="informacionUsuario">Publicaciones: {{ publicaciones.length }}</p>
+  
 
-   <br>
-
-    <!-- Contenedor de la cuadrícula de imágenes -->
     <div class="row">
-        <!-- Crear una columna para cada imagen. Utilizamos 'col-4' para tener tres columnas por fila. -->
-        <div class="col-4" *ngFor="let publicacion of publicaciones">
-            <div class="imagen-contenedor">
-                <img [src]="publicacion.downloadURL" alt="Imagen de la publicación" class="img-fluid">
-                <i (click)="confirmarEliminar(publicacion)" class="bi bi-trash bg bg-danger"></i>
-            </div>
+      <div class="col-4" *ngFor="let publicacion of publicaciones">
+        <div class="imagen-contenedor">
+          <img [src]="publicacion.downloadURL" alt="Imagen de la publicación" class="img-fluid">
+          <i (click)="confirmarEliminar(publicacion)" class="bi bi-trash bg bg-danger"></i>
         </div>
+      </div>
     </div>
 </div>
-<ng-template #loading>
-    <p>Cargando publicaciones...</p>
-</ng-template>
