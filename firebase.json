@@ -1,9 +1,17 @@
 {
-  "hosting": [
-    {
-      "target": "LinkSocial-Entrega",
-      "source": ".",
-      "frameworksBackend": {}
-    }
-  ]
+  "hosting": {
+    "site":"applinksocial",
+    "public": "dist/link-social-entrega",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
 }

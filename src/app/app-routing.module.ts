@@ -11,18 +11,19 @@ import { PerfilUsuarioSesionComponent } from './vistas/perfil-usuario-sesion/per
 import { BuscarUsuariosComponent } from './vistas/buscar-usuarios/buscar-usuarios.component';
 import { PerfilUsuarioBuscadoComponent } from './vistas/buscar-usuarios/perfil-usuario-buscado/perfil-usuario-buscado.component';
 import { RecuperarContrasenaComponent } from './vistas/recuperar-contrasena/recuperar-contrasena.component';
+import { inicioSesionGuard } from './Guard/inicioSesionGuard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/iniciarSesion', pathMatch: 'full' }, 
-  { path: 'iniciarSesion', component: IniciarSesionComponent },
+  {path: '', redirectTo: '/iniciarSesion', pathMatch: 'full' }, 
+  {path: 'iniciarSesion', component: IniciarSesionComponent },
   {path:'registrarUsuario',component:RegistroUsuariosComponent},
-  { path: 'paginaInicio', component: PaginaInicioComponent },
-  {path:'subirPublicacion',component:SubirPublicacionesComponent},
+  {path: 'paginaInicio', component: PaginaInicioComponent ,canActivate:[inicioSesionGuard]},
+  {path:'subirPublicacion',component:SubirPublicacionesComponent,canActivate:[inicioSesionGuard]},
   {path:'admin',component:AdminComponent,canActivate: [AdminGuard] },
   {path:'admin/:id',component:DetalleAdminComponent,canActivate: [AdminGuard] },
-  {path:'perfil',component:PerfilUsuarioSesionComponent},
-  {path:'buscarUsuario',component:BuscarUsuariosComponent},
-  {path:'perfilUsuarioBuscado/:id',component:PerfilUsuarioBuscadoComponent},
+  {path:'perfil',component:PerfilUsuarioSesionComponent,canActivate:[inicioSesionGuard]},
+  {path:'buscarUsuario',component:BuscarUsuariosComponent,canActivate:[inicioSesionGuard]},
+  {path:'perfilUsuarioBuscado/:id',component:PerfilUsuarioBuscadoComponent,canActivate:[inicioSesionGuard]},
   {path:'recuperar-contrasena',component:RecuperarContrasenaComponent}
 ];
 
