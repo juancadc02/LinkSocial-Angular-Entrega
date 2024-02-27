@@ -13,28 +13,26 @@ export class RegistroUsuariosComponent {
   mensaje?: string;
   fotoPerfilBase64: string | undefined;
 
-
   @ViewChild('password') passwordInput!: ElementRef;
   @ViewChild('confirmPassword') confirmPasswordInput!: ElementRef;
 
   contrasenasCoinciden = true;
 
-  constructor(private servicioFirebase:FirebaseService){}
+  constructor(private servicioFirebase: FirebaseService) {}
 
   registrarUsuario(email: string, password: string, nombreCompleto: string, movilUsuario: string, fchNacimiento: string, fotoPerfilBase64?: string) {
-   
-     // Verificar si las contraseñas coinciden
-     const passwordValue = this.passwordInput.nativeElement.value;
-     const confirmPasswordValue = this.confirmPasswordInput.nativeElement.value;
- 
-     this.contrasenasCoinciden = passwordValue === confirmPasswordValue;
- 
-     if (!this.contrasenasCoinciden) {
-       this.mensajeError = 'Las contraseñas no coinciden.';
-       return;
-     }
- 
-     this.mensajeError = ''; // Limpiar el mensaje de error
+    // Verificar si las contraseñas coinciden
+    const passwordValue = this.passwordInput.nativeElement.value;
+    const confirmPasswordValue = this.confirmPasswordInput.nativeElement.value;
+
+    this.contrasenasCoinciden = passwordValue === confirmPasswordValue;
+
+    if (!this.contrasenasCoinciden) {
+      this.mensajeError = 'Las contraseñas no coinciden.';
+      return;
+    }
+
+    this.mensajeError = ''; // Limpiar el mensaje de error
 
     const nuevoUsuario: Usuario = {
       nombreCompleto: nombreCompleto,
@@ -45,6 +43,7 @@ export class RegistroUsuariosComponent {
       fchNacimiento: fchNacimiento,
       rolAcceso: 'basico'
     };
+
     this.servicioFirebase.registroEmail(email, password, nuevoUsuario);
-  }  
+  }
 }

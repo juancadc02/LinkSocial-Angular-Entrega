@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FirebaseService } from 'src/app/Servicios/firebase.service';
+import { MensajeService } from 'src/app/Servicios/mensaje.service';
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -15,9 +16,11 @@ export class IniciarSesionComponent {
 
   mensajeSesionCerrada: string = '';
   private subscription: Subscription = new Subscription();
-    constructor(private servicioFirebase:FirebaseService,private router :Router){}
+    constructor(private servicioFirebase:FirebaseService,private router :Router,private mensajeService:MensajeService){}
   
-  
+    ngOnInit() {
+      this.mensajeService.mensajeActual.subscribe(mensaje => this.mensajeSesionCerrada = mensaje);
+    }
   ngOnDestroy() {
     // Importante: Desuscríbete para evitar pérdida de memoria
     this.subscription.unsubscribe();

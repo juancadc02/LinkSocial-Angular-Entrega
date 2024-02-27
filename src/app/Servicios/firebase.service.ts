@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Usuario } from '../Modelos/usuario';
 import { Firestore, collection, doc, setDoc } from '@angular/fire/firestore';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
 
-  constructor(private auth: AngularFireAuth,private db :Firestore) {}
+  constructor(private auth: AngularFireAuth,private db :Firestore,private router:Router) {}
 
   
 
@@ -26,12 +28,23 @@ export class FirebaseService {
           usuario.idUsuarios = uid;
           this.registroUsuario(uid, usuario);
           console.log('Usuario registrado y datos guardados con éxito');
+  
+          // Muestra SweetAlert para notificar éxito y redirige a la página de inicio de sesión
+          Swal.fire({
+            icon: 'success',
+            title: 'Registro exitoso',
+            text: 'Usuario registrado y datos guardados con éxito.',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            
+            this.router.navigate(['/iniciarSesion']);
+          });
         } else {
           console.error('Error: El usuario no se ha creado correctamente.');
         }
       })
       .catch((error) => {
-        alert(error.message);
+       
         console.error('Error al registrar usuario en Firestore: ', error);
       });
   }
