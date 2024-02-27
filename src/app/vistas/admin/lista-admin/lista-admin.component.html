@@ -1,32 +1,51 @@
-<!-- Tu tabla con estilos de Bootstrap para dispositivos móviles -->
-<div class="table-responsive mt-5">
-    <table class="table table-striped table-hover">
-        <!-- Cabezera. -->
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Correo</th>
-                <th scope="col">Fecha Nacimiento</th>
-                <th scope="col">Movil</th>
-                <th scope="col">Rol Acceso</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-
-        <!-- Contenido de la tabla. -->
-        <tbody>
-            <tr *ngFor="let usuarios of listaUsuarios">
-                <td>{{usuarios.nombreCompleto}}</td>
-                <td>{{usuarios.correoElectronico}}</td>
-                <td>{{usuarios.fchNacimiento}}</td>
-                <td>{{usuarios.movilUsuario}}</td>
-                <td>{{usuarios.rolAcceso}}</td>
-                <td>
-                    <span>
-                        <i class="bi bi-pencil-square text-warning" routerLink="/admin/{{usuarios.idUsuarios}}"></i>
-                    </span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<!-- Agrega esto a tu archivo de componente HTML -->
+<div class="mat-elevation-z8 mt-5">
+    <mat-table [dataSource]="listaUsuarios" class="mat-elevation-z8">
+  
+      <!-- Nombre Column -->
+      <ng-container matColumnDef="nombreCompleto">
+        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{usuario.nombreCompleto}} </mat-cell>
+      </ng-container>
+  
+      <!-- Correo Column -->
+      <ng-container matColumnDef="correoElectronico">
+        <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{usuario.correoElectronico}} </mat-cell>
+      </ng-container>
+  
+      <!-- Fecha Nacimiento Column -->
+      <ng-container matColumnDef="fchNacimiento">
+        <mat-header-cell *matHeaderCellDef> Fecha Nacimiento </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{usuario.fchNacimiento}} </mat-cell>
+      </ng-container>
+  
+      <!-- Movil Column -->
+      <ng-container matColumnDef="movilUsuario">
+        <mat-header-cell *matHeaderCellDef> Movil </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{usuario.movilUsuario}} </mat-cell>
+      </ng-container>
+  
+      <!-- Rol Acceso Column -->
+      <ng-container matColumnDef="rolAcceso">
+        <mat-header-cell *matHeaderCellDef> Rol Acceso </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{usuario.rolAcceso}} </mat-cell>
+      </ng-container>
+  
+      <!-- Acciones Column -->
+      <ng-container matColumnDef="acciones">
+        <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+        <mat-cell *matCellDef="let usuario">
+          <span>
+            <a routerLink="/admin/{{usuario.idUsuarios}}">
+              <mat-icon class="text-warning">edit</mat-icon>
+            </a>
+          </span>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnas;"></mat-row>
+    </mat-table>
+  </div>
+  

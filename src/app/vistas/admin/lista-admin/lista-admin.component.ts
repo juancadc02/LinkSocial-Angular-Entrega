@@ -15,6 +15,8 @@ export class ListaAdminComponent {
   listaUsuarios:Usuario[]=[];
   usuarios:Usuario[]=[]
 
+  columnas: string[] = ['nombreCompleto', 'correoElectronico', 'fchNacimiento', 'movilUsuario', 'rolAcceso', 'acciones'];
+
   ngOnInit(){
     this.servicioUsuarios.listarUsuarios().subscribe(res=>this.listaUsuarios=res);
   }

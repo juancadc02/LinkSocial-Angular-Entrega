@@ -24,7 +24,8 @@ import { PerfilUsuarioSesionComponent } from './vistas/perfil-usuario-sesion/per
 import { BuscarUsuariosComponent } from './vistas/buscar-usuarios/buscar-usuarios.component';
 import { PerfilUsuarioBuscadoComponent } from './vistas/buscar-usuarios/perfil-usuario-buscado/perfil-usuario-buscado.component';
 import { RecuperarContrasenaComponent } from './vistas/recuperar-contrasena/recuperar-contrasena.component';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +54,10 @@ import { RecuperarContrasenaComponent } from './vistas/recuperar-contrasena/recu
     ReactiveFormsModule,
     AngularFireStorageModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    MatTableModule,
+    MatIconModule,
+    
     
   ],
   providers: [],
